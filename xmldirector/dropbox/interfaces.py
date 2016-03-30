@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 ################################################################
-# onkopedia.crex
-# (C) 2015,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
+# xmldirector.dropbox
+# (C) 2016,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
 ################################################################
+
 
 from zope.interface import Interface
 from zope import schema
