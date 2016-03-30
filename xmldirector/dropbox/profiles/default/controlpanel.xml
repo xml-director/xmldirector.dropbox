@@ -6,7 +6,7 @@
     purge="False">
 
     <configlet
-        title="XML-Director C-Rex Settings"
+        title="XML-Director Dropbox Settings"
         action_id="xmldirector.dropbox"
         appId="xmldirector.dropbox"
         category="Products"

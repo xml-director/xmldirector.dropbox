@@ -8,8 +8,8 @@
 
 from plone.app.registry.browser import controlpanel
 
-from xmldirector.Dropbox.interfaces import IDropboxSettings
-from xmldirector.Dropbox.i18n import MessageFactory as _
+from xmldirector.dropbox.interfaces import IDropboxSettings
+from xmldirector.dropbox.i18n import MessageFactory as _
 
 
 class DropboxSettingsEditForm(controlpanel.RegistryEditForm):

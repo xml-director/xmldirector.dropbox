@@ -16,9 +16,9 @@
 
     <genericsetup:registerProfile
         name="default"
-        title="xmldirector.crex"
+        title="xmldirector.dropbox"
         directory="profiles/default"
-        description="C-Rex integration with Plone"
+        description="XML Director integration with Dropbox"
         provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 
