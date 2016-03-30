@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '0.1.5'
+version = '0.1.0'
 
 setup(name='xmldirector.dropbox',
       version=version,
@@ -18,7 +18,7 @@ setup(name='xmldirector.dropbox',
           "Framework :: Zope2",
           "Topic :: Software Development :: Libraries :: Python Modules",
       ],
-      keywords='xml-director DOCX XML C-Rex Plone Python ',
+      keywords='xml-director dropbox XML Plone Python ',
       author='Andreas Jung',
       author_email='info@zopyx.com',
       url='http://pypi.python.org/pypi/xmldirector.dropbox',
@@ -29,13 +29,6 @@ setup(name='xmldirector.dropbox',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'zopyx.plone.persistentlogger',
-          'furl',
-          'plone.rest',
-          'collective.taskqueue',
-          'plone.app.testing',
-          'xmldirector.plonecore',
-          'requests',
       ],
       tests_require=['zope.testing'],
       entry_points="""
