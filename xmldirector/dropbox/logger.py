@@ -7,9 +7,5 @@
 
 import logging
 
-LOG = logging.getLogger('xmldirector.crex')
+LOG = logging.getLogger('xmldirector.dropbox')
 
-requests_log = logging.getLogger("requests")
-requests_log.setLevel(logging.WARNING)
-urllib3_log = logging.getLogger("urllib3")
-urllib3_log.setLevel(logging.WARNING)

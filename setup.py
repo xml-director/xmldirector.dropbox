@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 version = '0.1.5'
 
-setup(name='xmldirector.crex',
+setup(name='xmldirector.dropbox',
       version=version,
       description="Plone/XML-Director integration with c-rex.net",
       long_description=open(os.path.join("docs", "source", "README.rst")).read() + "\n" +
@@ -21,7 +21,7 @@ setup(name='xmldirector.crex',
       keywords='xml-director DOCX XML C-Rex Plone Python ',
       author='Andreas Jung',
       author_email='info@zopyx.com',
-      url='http://pypi.python.org/pypi/xmldirector.crex',
+      url='http://pypi.python.org/pypi/xmldirector.dropbox',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['xmldirector'],

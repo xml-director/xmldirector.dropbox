@@ -7,6 +7,6 @@
 
 try:
     from zope.i18nmessageid import MessageFactory
-    MessageFactory = MessageFactory('xmldirector.crex')
+    MessageFactory = MessageFactory('xmldirector.dropbox')
 except ImportError:
     pass
