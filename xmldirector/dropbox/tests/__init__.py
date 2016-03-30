@@ -1,4 +1,4 @@
 ################################################################
-# xmldirector.crex
+# xmldirector.dropbox
 # (C) 2015,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
 ################################################################

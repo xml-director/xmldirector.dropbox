@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 ################################################################
-# xmldirector.crex
+# xmldirector.dropbox
 # (C) 2015,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
 ################################################################
 
 
 from unittest import TestCase
 
-from xmldirector.crex.browser.rewriterules import RuleRewriter
+from xmldirector.dropbox.browser.rewriterules import RuleRewriter
 
 
 rules = [
