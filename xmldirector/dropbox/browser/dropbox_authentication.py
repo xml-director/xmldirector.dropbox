@@ -74,13 +74,3 @@ class DropboxAuthentication(BrowserView):
         authorize_url = s.build_authorize_url(t, self.context.absolute_url() + '/authorize-dropbox-action')
         return authorize_url
 
-    def get_handle(self, root_path='/'):
-        settings = self.dropbox_settings
-        annotation = IAnnotations(self.context)
-        return DropboxFS(
-                settings.dropbox_app_key,
-                settings.dropbox_app_secret,
-                'dropbox',
-                annotation[DROPBOX_TOKEN_KEY],
-                annotation[DROPBOX_TOKEN_SECRET],
-                root_path=root_path)

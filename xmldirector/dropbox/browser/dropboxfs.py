@@ -475,6 +475,8 @@ class DropboxFS(FS):
         return u"<DropboxFS: >"
 
     def _get_path(self, path):
+        if path.startswith(self.root_path):
+            return normpath(abspath(normpath(path)))
         return normpath(self.root_path + '/' + abspath(normpath(path)))
 
     def getmeta(self, meta_name, default=NoDefaultMeta):
@@ -513,6 +515,7 @@ class DropboxFS(FS):
             return False
 
     def isfile(self, path):
+        print repr(path)
         try:
             info = self.getinfo(path)
             return not info.get('isdir', False)
