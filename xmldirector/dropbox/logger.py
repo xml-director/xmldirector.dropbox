@@ -2,7 +2,7 @@
 
 ################################################################
 # xmldirector.dropbox
-# (C) 2015,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
+# (C) 2016,  Andreas Jung, www.zopyx.com, Tuebingen, Germany
 ################################################################
 
 import logging
