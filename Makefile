@@ -6,3 +6,4 @@ docs:
 
 upload-docs:
 	python setup.py upload_docs --upload-dir docs/build/html
+
