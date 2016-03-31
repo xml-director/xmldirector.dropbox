@@ -29,6 +29,8 @@ setup(name='xmldirector.dropbox',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'fs',
+          'dropbox'
       ],
       tests_require=['zope.testing'],
       entry_points="""

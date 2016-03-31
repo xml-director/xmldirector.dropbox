@@ -15,4 +15,20 @@
         permission="cmf.ManagePortal"
     />
 
+    <browser:page
+        name="authorize-dropbox"
+        for="xmldirector.plonecore.connector.IConnector"
+        permission="cmf.ModifyPortalContent"
+        class=".dropbox_authentication.DropboxAuthentication"
+        template="dropbox_authentication.pt"
+        />
+
+    <browser:page
+        name="deauthorize-dropbox"
+        for="xmldirector.plonecore.connector.IConnector"
+        permission="cmf.ModifyPortalContent"
+        class=".dropbox_authentication.DropboxAuthentication"
+        attribute="deauthorize"
+        />
+
 </configure>
