@@ -29,6 +29,22 @@
         permission="cmf.ModifyPortalContent"
         class=".dropbox_authentication.DropboxAuthentication"
         attribute="deauthorize"
+        />                                              i
+
+    <browser:page
+        name="authorize-dropbox-action"
+        for="xmldirector.plonecore.connector.IConnector"
+        permission="cmf.ModifyPortalContent"
+        class=".dropbox_authentication.DropboxAuthentication"
+        attribute="authorize"
+        />                                              i
+
+    <browser:page
+        name="demo-dropbox"
+        for="xmldirector.plonecore.connector.IConnector"
+        permission="cmf.ModifyPortalContent"
+        class=".dropbox_authentication.DropboxAuthentication"
+        attribute="demo"
         />
 
 </configure>

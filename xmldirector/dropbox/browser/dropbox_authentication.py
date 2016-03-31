@@ -16,27 +16,51 @@ from zope.annotation import IAnnotations
 from xmldirector.dropbox.interfaces import IDropboxSettings
 
 
-DROPBOX_KEY = 'xmldirector.dropbox.oauth_token'
+DROPBOX_TOKEN_KEY = 'xmldirector.dropbox.token_key'
+DROPBOX_TOKEN_SECRET = 'xmldirector.dropbox.token_secret'
+DROPBOX_TEMP_TOKEN = 'xmldirector.dropbox.oauth_temporary_token'
 
 
 class DropboxAuthentication(BrowserView):
 
+    def authorize(self, oauth_token):
+        
+        annotation = IAnnotations(self.context)
+        s = self.dropbox_session
+        a = s.obtain_access_token(annotation[DROPBOX_TEMP_TOKEN])
+        token_key, token_secret = a.key, a.secret
+        annotation[DROPBOX_TOKEN_KEY] = a.key
+        annotation[DROPBOX_TOKEN_SECRET] = a.secret
 
-    def __init__(self, context, request):
-        super(DropboxAuthentication, self).__init__(context, request)
-        oauth_token = self.request.get('oauth_token')
-        if oauth_token:
-            annotation = IAnnotations(self.context)
-            annotation[DROPBOX_KEY] = oauth_token
+        self.context.plone_utils.addPortalMessage(u'Dropbox access authorized')
+        self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
+
+    @property
+    def dropbox_settings(self):
+        registry = getUtility(IRegistry)
+        return registry.forInterface(IDropboxSettings)
+
+    @property
+    def dropbox_session(self):
+        settings = self.dropbox_settings
+        return session.DropboxSession(
+                settings.dropbox_app_key, 
+                settings.dropbox_app_secret, 
+                'dropbox')
 
     def get_oauth_token(self):
         annotation = IAnnotations(self.context)
-        return annotation.get(DROPBOX_KEY)
+        return annotation.get(DROPBOX_TOKEN_KEY)
 
     def deauthorize(self):
         annotation = IAnnotations(self.context)
         try:
-            del annotation[DROPBOX_KEY]
+            del annotation[DROPBOX_TOKEN_KEY]
+        except KeyError:
+            pass
+
+        try:
+            del annotation[DROPBOX_TOKEN_SECRET]
         except KeyError:
             pass
 
@@ -44,13 +68,18 @@ class DropboxAuthentication(BrowserView):
         self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
 
     def get_oauth_url(self):
-
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(IDropboxSettings)
-        s = session.DropboxSession(
-                settings.dropbox_app_key, 
-                settings.dropbox_app_secret, 
-                'dropbox')
+        s = self.dropbox_session
         t = s.obtain_request_token()
-        authorize_url = s.build_authorize_url(t, self.context.absolute_url() + '/authorize-dropbox')
+        IAnnotations(self.context)[DROPBOX_TEMP_TOKEN] = t
+        authorize_url = s.build_authorize_url(t, self.context.absolute_url() + '/authorize-dropbox-action')
         return authorize_url
+
+    def demo(self):
+        settings = self.dropbox_settings
+        app_key = settings.dropbox_app_key 
+        app_secret = settings.dropbox_app_secret
+        annotation = IAnnotations(self.context)
+        token_key = annotation[DROPBOX_TOKEN_KEY]
+        token_secret = annotation[DROPBOX_TOKEN_SECRET]
+        import pdb; pdb.set_trace() 
+
