@@ -515,7 +515,6 @@ class DropboxFS(FS):
             return False
 
     def isfile(self, path):
-        print repr(path)
         try:
             info = self.getinfo(path)
             return not info.get('isdir', False)
