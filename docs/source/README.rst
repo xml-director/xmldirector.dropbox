@@ -17,14 +17,20 @@ Requirements
 - XML Director (xmldirector.plonecore)
 
 
-Prequisites
------------
+Usage
+-----
 
 First you need to register your own App as Dropbox developer
 on https://dropbox.com/developer. Your application must be configured
 for full dropbox access. The application key and application secret
 must be configured globally inside your Plone site setup -> XML Director
 Dropbox setting.
+
+A ``Connector`` instance must be authorized with Dropbox (see ``Dropbox``
+tab/action).
+
+The connection URL for a ``Connector`` connected to Dropbox must be
+``dropbox://dropbox.com/``.
 
 
 License
