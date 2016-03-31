@@ -39,12 +39,4 @@
         attribute="authorize"
         />                                              i
 
-    <browser:page
-        name="demo-dropbox"
-        for="xmldirector.plonecore.connector.IConnector"
-        permission="cmf.ModifyPortalContent"
-        class=".dropbox_authentication.DropboxAuthentication"
-        attribute="demo"
-        />
-
 </configure>
