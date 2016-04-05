@@ -466,7 +466,7 @@ class DropboxFS(FS):
         self.client = create_client(app_key, app_secret, access_type,
                                     token_key, token_secret)
         self.localtime = localtime
-        self.root_path = root_path
+        self.root_path = unicode(root_path, 'utf8')
 
     def __str__(self):
         return "<DropboxFS: >"
@@ -475,9 +475,13 @@ class DropboxFS(FS):
         return u"<DropboxFS: >"
 
     def _get_path(self, path):
+        if not isinstance(path, unicode):
+            path = unicode(path, 'utf8')
         if path.startswith(self.root_path):
             return normpath(abspath(normpath(path)))
-        return normpath(self.root_path + '/' + abspath(normpath(path)))
+
+        p = self.root_path + u'/' + abspath(normpath(path))
+        return normpath(p)
 
     def getmeta(self, meta_name, default=NoDefaultMeta):
         if meta_name == 'read_only':

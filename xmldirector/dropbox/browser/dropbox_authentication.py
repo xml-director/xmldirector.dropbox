@@ -35,6 +35,21 @@ class DropboxAuthentication(BrowserView):
         self.context.plone_utils.addPortalMessage(u'Dropbox access authorized')
         self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
 
+    def deauthorize(self):
+        annotation = IAnnotations(self.context)
+        try:
+            del annotation[DROPBOX_TOKEN_KEY]
+        except KeyError:
+            pass
+
+        try:
+            del annotation[DROPBOX_TOKEN_SECRET]
+        except KeyError:
+            pass
+
+        self.context.plone_utils.addPortalMessage(u'Dropbox access deauthorized')
+        self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
+
     @property
     def dropbox_settings(self):
         registry = getUtility(IRegistry)
@@ -51,21 +66,6 @@ class DropboxAuthentication(BrowserView):
     def get_oauth_token(self):
         annotation = IAnnotations(self.context)
         return annotation.get(DROPBOX_TOKEN_KEY)
-
-    def deauthorize(self):
-        annotation = IAnnotations(self.context)
-        try:
-            del annotation[DROPBOX_TOKEN_KEY]
-        except KeyError:
-            pass
-
-        try:
-            del annotation[DROPBOX_TOKEN_SECRET]
-        except KeyError:
-            pass
-
-        self.context.plone_utils.addPortalMessage(u'Dropbox access deauthorized')
-        self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
 
     def get_oauth_url(self):
         s = self.dropbox_session
