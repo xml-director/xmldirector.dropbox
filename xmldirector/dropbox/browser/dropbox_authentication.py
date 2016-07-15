@@ -9,8 +9,10 @@
 from dropbox import session
 
 from zope.component import getUtility
+from zope.interface import alsoProvides
 from Products.Five.browser import BrowserView
 from plone.registry.interfaces import IRegistry
+from plone.protect.interfaces import IDisableCSRFProtection
 from zope.annotation import IAnnotations
 
 from xmldirector.dropbox.interfaces import IDropboxSettings
@@ -24,7 +26,7 @@ DROPBOX_TEMP_TOKEN = 'xmldirector.dropbox.oauth_temporary_token'
 class DropboxAuthentication(BrowserView):
 
     def authorize(self, oauth_token):
-        
+        alsoProvides(self.request, IDisableCSRFProtection)
         annotation = IAnnotations(self.context)
         s = self.dropbox_session
         a = s.obtain_access_token(annotation[DROPBOX_TEMP_TOKEN])
@@ -36,6 +38,7 @@ class DropboxAuthentication(BrowserView):
         self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
 
     def deauthorize(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
         annotation = IAnnotations(self.context)
         try:
             del annotation[DROPBOX_TOKEN_KEY]
