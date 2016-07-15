@@ -6,7 +6,7 @@
     purge="False">
 
     <configlet
-        title="XML-Director Dropbox Settings"
+        title="XML-Director Dropbox"
         action_id="xmldirector.dropbox"
         appId="xmldirector.dropbox"
         category="Products"
