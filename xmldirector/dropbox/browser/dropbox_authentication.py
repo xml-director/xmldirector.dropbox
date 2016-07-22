@@ -71,6 +71,7 @@ class DropboxAuthentication(BrowserView):
         return annotation.get(DROPBOX_TOKEN_KEY)
 
     def get_oauth_url(self):
+        alsoProvides(self.request, IDisableCSRFProtection)
         s = self.dropbox_session
         t = s.obtain_request_token()
         IAnnotations(self.context)[DROPBOX_TEMP_TOKEN] = t
