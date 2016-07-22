@@ -25,8 +25,11 @@ DROPBOX_TEMP_TOKEN = 'xmldirector.dropbox.oauth_temporary_token'
 
 class DropboxAuthentication(BrowserView):
 
+    def __init__(self, context, request)
+        alsoProvides(self.request, IDisableCSRFProtection) # fuck all Plone protection shit!
+        super(DropboxAuthentication, self).__init__(context, request)
+
     def authorize(self, oauth_token):
-        alsoProvides(self.request, IDisableCSRFProtection)
         annotation = IAnnotations(self.context)
         s = self.dropbox_session
         a = s.obtain_access_token(annotation[DROPBOX_TEMP_TOKEN])
@@ -38,7 +41,6 @@ class DropboxAuthentication(BrowserView):
         self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
 
     def deauthorize(self):
-        alsoProvides(self.request, IDisableCSRFProtection)
         annotation = IAnnotations(self.context)
         try:
             del annotation[DROPBOX_TOKEN_KEY]
@@ -71,7 +73,6 @@ class DropboxAuthentication(BrowserView):
         return annotation.get(DROPBOX_TOKEN_KEY)
 
     def get_oauth_url(self):
-        alsoProvides(self.request, IDisableCSRFProtection)
         s = self.dropbox_session
         t = s.obtain_request_token()
         IAnnotations(self.context)[DROPBOX_TEMP_TOKEN] = t
