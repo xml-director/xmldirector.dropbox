@@ -25,7 +25,7 @@ DROPBOX_TEMP_TOKEN = 'xmldirector.dropbox.oauth_temporary_token'
 
 class DropboxAuthentication(BrowserView):
 
-    def __init__(self, context, request)
+    def __init__(self, context, request):
         alsoProvides(self.request, IDisableCSRFProtection) # fuck all Plone protection shit!
         super(DropboxAuthentication, self).__init__(context, request)
 
