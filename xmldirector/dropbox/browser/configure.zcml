@@ -11,6 +11,7 @@
     <browser:page
         name="xmldirector-dropbox-settings"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        layer="xmldirector.dropbox.interfaces.IBrowserLayer"
         class=".controlpanel.DropboxSettingsControlPanel"
         permission="cmf.ManagePortal"
     />
@@ -19,6 +20,7 @@
         name="authorize-dropbox"
         for="xmldirector.plonecore.connector.IConnector"
         permission="cmf.ModifyPortalContent"
+        layer="xmldirector.dropbox.interfaces.IBrowserLayer"
         class=".dropbox_authentication.DropboxAuthentication"
         template="dropbox_authentication.pt"
         />
@@ -26,17 +28,25 @@
     <browser:page
         name="deauthorize-dropbox"
         for="xmldirector.plonecore.connector.IConnector"
+        layer="xmldirector.dropbox.interfaces.IBrowserLayer"
         permission="cmf.ModifyPortalContent"
         class=".dropbox_authentication.DropboxAuthentication"
         attribute="deauthorize"
-        />                                              i
+        />                                             
 
     <browser:page
         name="authorize-dropbox-action"
         for="xmldirector.plonecore.connector.IConnector"
+        layer="xmldirector.dropbox.interfaces.IBrowserLayer"
         permission="cmf.ModifyPortalContent"
         class=".dropbox_authentication.DropboxAuthentication"
         attribute="authorize"
-        />                                              i
+        />                                             
+
+    <browser:resourceDirectory
+        directory="resources"
+        name="xmldirector.dropbox"
+        layer="xmldirector.dropbox.interfaces.IBrowserLayer"
+        />
 
 </configure>
