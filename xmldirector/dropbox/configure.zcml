@@ -4,23 +4,19 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:pp="http://namespaces.zopyx.com/pp"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="xmldirector.dropbox"
     >
 
-    <include package="plone.browserlayer" />
     <include package="Products.CMFCore" file="permissions.zcml" />
+    <include package="plone.browserlayer" />
     <include package=".browser" />
 
     <i18n:registerTranslations directory="locales" />
 
-    <genericsetup:registerProfile
-        name="default"
-        title="xmldirector.dropbox"
-        directory="profiles/default"
-        description="XML Director integration with Dropbox"
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-    />
-
+    <!-- Plone 4.3 -->
+    <include zcml:condition="not-have plone-5" file="profiles-4.zcml" />
+    <!-- Plone 5.0 -->
+    <include zcml:condition="have plone-5" file="profiles-5.zcml" />
 </configure>
