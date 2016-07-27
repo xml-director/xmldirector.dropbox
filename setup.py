@@ -1,11 +1,11 @@
 import os
 from setuptools import setup, find_packages
 
-version = '0.9.1'
+version = '0.9.2'
 
 setup(name='xmldirector.dropbox',
       version=version,
-      description="Plone/XML-Director integration with c-rex.net",
+      description="Plone XML-Director integration with Dropbox",
       long_description=open(os.path.join("docs", "source", "README.rst")).read() + "\n" +
       open(os.path.join("docs", "source", "HISTORY.rst")).read(),
       # Get more strings from
