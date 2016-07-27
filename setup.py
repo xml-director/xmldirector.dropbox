@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '0.1.0'
+version = '0.9.0'
 
 setup(name='xmldirector.dropbox',
       version=version,

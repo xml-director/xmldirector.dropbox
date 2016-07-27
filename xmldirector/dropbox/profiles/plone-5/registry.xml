@@ -12,6 +12,7 @@
       <value key="resources" purge="false">
         <element>xmldirector-dropbox</element>
       </value>
+      <value key="csscompilation">++resource++xmldirector.dropbox/styles.css</value>
       <value key="enabled">True</value>
       <value key="compile">True</value>
     </records>
