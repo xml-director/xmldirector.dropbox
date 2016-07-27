@@ -8,4 +8,3 @@
 import logging
 
 LOG = logging.getLogger('xmldirector.dropbox')
-

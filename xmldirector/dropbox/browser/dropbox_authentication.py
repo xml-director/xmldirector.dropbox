@@ -26,19 +26,20 @@ DROPBOX_TEMP_TOKEN = 'xmldirector.dropbox.oauth_temporary_token'
 class DropboxAuthentication(BrowserView):
 
     def __init__(self, context, request):
-        alsoProvides(request, IDisableCSRFProtection) # fuck all Plone protection shit!
+        # fuck all Plone protection shit!
+        alsoProvides(request, IDisableCSRFProtection)
         super(DropboxAuthentication, self).__init__(context, request)
 
     def authorize(self, oauth_token):
         annotation = IAnnotations(self.context)
         s = self.dropbox_session
         a = s.obtain_access_token(annotation[DROPBOX_TEMP_TOKEN])
-        token_key, token_secret = a.key, a.secret
         annotation[DROPBOX_TOKEN_KEY] = a.key
         annotation[DROPBOX_TOKEN_SECRET] = a.secret
 
         self.context.plone_utils.addPortalMessage(u'Dropbox access authorized')
-        self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
+        self.request.response.redirect(
+            self.context.absolute_url() + '/authorize-dropbox')
 
     def deauthorize(self):
         annotation = IAnnotations(self.context)
@@ -52,8 +53,10 @@ class DropboxAuthentication(BrowserView):
         except KeyError:
             pass
 
-        self.context.plone_utils.addPortalMessage(u'Dropbox access deauthorized')
-        self.request.response.redirect(self.context.absolute_url() + '/authorize-dropbox')
+        self.context.plone_utils.addPortalMessage(
+            u'Dropbox access deauthorized')
+        self.request.response.redirect(
+            self.context.absolute_url() + '/authorize-dropbox')
 
     @property
     def dropbox_settings(self):
@@ -64,9 +67,9 @@ class DropboxAuthentication(BrowserView):
     def dropbox_session(self):
         settings = self.dropbox_settings
         return session.DropboxSession(
-                settings.dropbox_app_key, 
-                settings.dropbox_app_secret, 
-                'dropbox')
+            settings.dropbox_app_key,
+            settings.dropbox_app_secret,
+            'dropbox')
 
     def get_oauth_token(self):
         annotation = IAnnotations(self.context)
@@ -76,6 +79,6 @@ class DropboxAuthentication(BrowserView):
         s = self.dropbox_session
         t = s.obtain_request_token()
         IAnnotations(self.context)[DROPBOX_TEMP_TOKEN] = t
-        authorize_url = s.build_authorize_url(t, self.context.absolute_url() + '/authorize-dropbox-action')
+        authorize_url = s.build_authorize_url(
+            t, self.context.absolute_url() + '/authorize-dropbox-action')
         return authorize_url
-
