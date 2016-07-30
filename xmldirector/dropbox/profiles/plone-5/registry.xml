@@ -17,5 +17,6 @@
       <value key="jscompilation">++resource++xmldirector.dropbox/local.js</value>
       <value key="enabled">True</value>
       <value key="compile">True</value>
+      <value key="merge_with">default</value>
     </records>
 </registry>
